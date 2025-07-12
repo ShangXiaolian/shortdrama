@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const API_URL = "https://api.airtable.com/v0/appw9QR3oaKO3u01m/Drama";
-  const API_KEY = "patFyAm6jvrK5DXSo";
+  const API_KEY = "Bearer patFyAm6jvrK5DXSo";
 
   const lang = navigator.language.startsWith('es') ? 'es' :
                navigator.language.startsWith('fr') ? 'fr' : 'en';
