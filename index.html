@@ -3,34 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>ShortDrama</title>
+  <title>🔥 Hot Dramas</title>
   <link rel="stylesheet" href="style.css" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0T2HXSVQY9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0T2HXSVQY9');
-  </script>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1>ShortDrama</h1>
-    </header>
-
-    <section class="section-title">
-      <h2 id="featured-title">🔥 Trending Dramas</h2>
+    <section class="carousel-wrapper">
+      <div class="carousel" id="carousel-track"></div>
+      <button class="nav-btn prev" onclick="moveSlide(-1)">‹</button>
+      <button class="nav-btn next" onclick="moveSlide(1)">›</button>
     </section>
 
-    <section id="carousel-wrapper">
-      <button class="carousel-btn left" onclick="scrollCarousel(-1)">←</button>
-      <div id="carousel"></div>
-      <button class="carousel-btn right" onclick="scrollCarousel(1)">→</button>
-    </section>
-
-    <section id="search">
-      <input type="text" id="search-box" placeholder="Search dramas..." />
+    <section class="search-section">
+      <input type="text" id="search-box" placeholder="Search..." />
       <select id="language-selector">
         <option value="en">English</option>
         <option value="es">Español</option>
@@ -40,40 +25,45 @@
       </select>
     </section>
 
-    <section class="sticker-tip">
-      <span>🎬 Tap a cover to watch full episodes</span>
-    </section>
+    <div class="sticker-tip">
+      <span id="click-tip">🎬 Tap a cover to watch full episodes</span>
+    </div>
 
     <main id="masonry"></main>
   </div>
 
   <script src="app.js"></script>
   <script>
-    function scrollCarousel(dir) {
-      const carousel = document.getElementById("carousel");
-      carousel.scrollBy({ left: dir * 220, behavior: 'smooth' });
+    let currentIndex = 0;
+    let autoScroll;
+
+    function updateCarousel() {
+      const cards = document.querySelectorAll(".carousel-card");
+      cards.forEach((card, index) => {
+        card.classList.remove("center", "left", "right");
+        if (index === currentIndex) card.classList.add("center");
+        else if (index === currentIndex - 1) card.classList.add("left");
+        else if (index === currentIndex + 1) card.classList.add("right");
+        else card.style.opacity = "0";
+      });
     }
 
-    const titlesByLang = {
-      en: "🔥 Trending Dramas",
-      es: "🔥 Dramas Populares",
-      fr: "🔥 Séries Tendance",
-      pt: "🔥 Dramas em Alta",
-      ar: "🔥 المسلسلات الرائجة"
-    };
+    function moveSlide(step) {
+      const cards = document.querySelectorAll(".carousel-card");
+      currentIndex = (currentIndex + step + cards.length) % cards.length;
+      updateCarousel();
+    }
 
-    const tipsByLang = {
-      en: "🎬 Tap a cover to watch full episodes",
-      es: "🎬 Toca una imagen para ver todos los episodios",
-      fr: "🎬 Touchez une image pour voir tous les épisodes",
-      pt: "🎬 Toque na imagem para ver os episódios completos",
-      ar: "🎬 اضغط على الصورة لمشاهدة الحلقات كاملة"
-    };
+    function autoStart() {
+      autoScroll = setInterval(() => moveSlide(1), 4000);
+    }
+
+    function stopAuto() {
+      clearInterval(autoScroll);
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
-      const lang = navigator.language.slice(0, 2);
-      document.getElementById("featured-title").innerText = titlesByLang[lang] || titlesByLang.en;
-      document.querySelector(".sticker-tip span").innerText = tipsByLang[lang] || tipsByLang.en;
+      autoStart();
     });
   </script>
 </body>
