@@ -1,0 +1,112 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background-color: #fafafa;
+}
+.container {
+  max-width: 430px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+header {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.section-title {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+#featured-title {
+  font-size: 1.2rem;
+}
+#carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+#carousel {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+}
+#carousel img {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+#carousel img:hover {
+  transform: scale(1.05);
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  background: rgba(255,255,255,0.7);
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+.carousel-btn.left { left: 0.5rem; }
+.carousel-btn.right { right: 0.5rem; }
+
+#search {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+#search input, #search select {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.sticker-tip {
+  position: relative;
+  text-align: center;
+  background: #ffe;
+  color: #444;
+  margin: 0.5rem 1rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px dashed #ffa;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+#masonry {
+  column-width: 180px;
+  column-gap: 0.5rem;
+  padding: 0.5rem;
+}
+.drama-card {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+.drama-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+.drama-card h3 {
+  margin: 0;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
