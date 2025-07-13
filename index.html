@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>ShortDrama</title>
   <link rel="stylesheet" href="style.css" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0T2HXSVQY9"></script>
@@ -14,21 +14,67 @@
   </script>
 </head>
 <body>
-  <header>
-    <h1>ShortDrama</h1>
-    <div id="language-switcher">
-      <button data-lang="en">English</button>
-      <button data-lang="es">Español</button>
-      <button data-lang="fr">Français</button>
-    </div>
-  </header>
+  <div class="container">
+    <header>
+      <h1>ShortDrama</h1>
+    </header>
 
-  <section id="carousel"></section>
-  <section id="search">
-    <input type="text" id="search-box" placeholder="Search dramas..." />
-  </section>
-  <main id="masonry"></main>
+    <section class="section-title">
+      <h2 id="featured-title">🔥 Trending Dramas</h2>
+    </section>
+
+    <section id="carousel-wrapper">
+      <button class="carousel-btn left" onclick="scrollCarousel(-1)">←</button>
+      <div id="carousel"></div>
+      <button class="carousel-btn right" onclick="scrollCarousel(1)">→</button>
+    </section>
+
+    <section id="search">
+      <input type="text" id="search-box" placeholder="Search dramas..." />
+      <select id="language-selector">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+        <option value="ar">العربية</option>
+      </select>
+    </section>
+
+    <section class="sticker-tip">
+      <span>🎬 Tap a cover to watch full episodes</span>
+    </section>
+
+    <main id="masonry"></main>
+  </div>
 
   <script src="app.js"></script>
+  <script>
+    function scrollCarousel(dir) {
+      const carousel = document.getElementById("carousel");
+      carousel.scrollBy({ left: dir * 220, behavior: 'smooth' });
+    }
+
+    const titlesByLang = {
+      en: "🔥 Trending Dramas",
+      es: "🔥 Dramas Populares",
+      fr: "🔥 Séries Tendance",
+      pt: "🔥 Dramas em Alta",
+      ar: "🔥 المسلسلات الرائجة"
+    };
+
+    const tipsByLang = {
+      en: "🎬 Tap a cover to watch full episodes",
+      es: "🎬 Toca una imagen para ver todos los episodios",
+      fr: "🎬 Touchez une image pour voir tous les épisodes",
+      pt: "🎬 Toque na imagem para ver os episódios completos",
+      ar: "🎬 اضغط على الصورة لمشاهدة الحلقات كاملة"
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = navigator.language.slice(0, 2);
+      document.getElementById("featured-title").innerText = titlesByLang[lang] || titlesByLang.en;
+      document.querySelector(".sticker-tip span").innerText = tipsByLang[lang] || tipsByLang.en;
+    });
+  </script>
 </body>
 </html>
