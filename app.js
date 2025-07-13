@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const baseId = "appw9QR3oaKO3u01m";
-  const tableName = "Dramas"; // Correct table name
+  const tableName = "Dramas";
   const API_URL = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
   const API_KEY = "Bearer patFyAm6jvrK5DXSo";
 
@@ -30,13 +30,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("masonry");
     container.innerHTML = "";
 
-    const filtered = allRecords.filter(r => r.fields.language === currentLang);
+    const filtered = allRecords.filter(r => r.fields.Language === currentLang);
     filtered.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
 
     for (const record of filtered) {
-      const cover = record.fields.cover_image?.[0]?.url || "https://via.placeholder.com/300x450?text=No+Image";
-      const title = record.fields.title || "Untitled";
-      const link = record.fields.deep_link || "#";
+      const cover = record.fields.Cover_image?.[0]?.url || "https://via.placeholder.com/300x450?text=No+Image";
+      const title = record.fields["Title (Localized)"] || "Untitled";
+      const link = record.fields["App Link"] || "#";
 
       const card = document.createElement("div");
       card.className = "drama-card";
@@ -51,10 +51,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const renderCarousel = () => {
     const carousel = document.getElementById("carousel");
-    const featured = allRecords.filter(r => r.fields.featured && r.fields.language === currentLang);
+    const featured = allRecords.filter(r => r.fields["Is Featured"] && r.fields.Language === currentLang);
     carousel.innerHTML = featured.map(r => {
-      const cover = r.fields.cover_image?.[0]?.url || "";
-      const link = r.fields.deep_link || "#";
+      const cover = r.fields.Cover_image?.[0]?.url || "";
+      const link = r.fields["App Link"] || "#";
       return `<img src="${cover}" style="width: 100%; margin-bottom: 1rem;" onclick="window.location.href='${link}'" />`;
     }).join("");
   };
@@ -66,14 +66,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.innerHTML = "";
 
     const filtered = allRecords.filter(r =>
-      (r.fields.title || "").toLowerCase().includes(term) &&
-      r.fields.language === currentLang
+      (r.fields["Title (Localized)"] || "").toLowerCase().includes(term) &&
+      r.fields.Language === currentLang
     );
 
     for (const record of filtered) {
-      const cover = record.fields.cover_image?.[0]?.url || "https://via.placeholder.com/300x450?text=No+Image";
-      const title = record.fields.title || "Untitled";
-      const link = record.fields.deep_link || "#";
+      const cover = record.fields.Cover_image?.[0]?.url || "https://via.placeholder.com/300x450?text=No+Image";
+      const title = record.fields["Title (Localized)"] || "Untitled";
+      const link = record.fields["App Link"] || "#";
 
       const card = document.createElement("div");
       card.className = "drama-card";
