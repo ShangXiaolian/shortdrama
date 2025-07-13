@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tableName = "Dramas";
   const API_URL = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
   const API_KEY = "Bearer patFyAm6jvrK5DXSo.c4f37b31cbf31e45cc4ac2601d5aa434fa9d01655aa208fcd9b824d39618ab66";
-
   const lang = navigator.language.slice(0, 2);
   let currentLang = ["en", "es", "fr", "pt", "ar"].includes(lang) ? lang : "en";
   let allRecords = [];
