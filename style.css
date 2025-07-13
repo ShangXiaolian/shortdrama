@@ -63,7 +63,6 @@ body {
 .nav-btn.next {
   right: 5px;
 }
-
 .search-section {
   display: flex;
   justify-content: center;
@@ -76,7 +75,6 @@ body {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
-
 .sticker-tip {
   text-align: center;
   background: #ffe;
@@ -87,7 +85,6 @@ body {
   border-radius: 8px;
   font-size: 0.9rem;
 }
-
 #masonry {
   column-width: 180px;
   column-gap: 0.5rem;

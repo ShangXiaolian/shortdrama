@@ -33,38 +33,5 @@
   </div>
 
   <script src="app.js"></script>
-  <script>
-    let currentIndex = 0;
-    let autoScroll;
-
-    function updateCarousel() {
-      const cards = document.querySelectorAll(".carousel-card");
-      cards.forEach((card, index) => {
-        card.classList.remove("center", "left", "right");
-        if (index === currentIndex) card.classList.add("center");
-        else if (index === currentIndex - 1) card.classList.add("left");
-        else if (index === currentIndex + 1) card.classList.add("right");
-        else card.style.opacity = "0";
-      });
-    }
-
-    function moveSlide(step) {
-      const cards = document.querySelectorAll(".carousel-card");
-      currentIndex = (currentIndex + step + cards.length) % cards.length;
-      updateCarousel();
-    }
-
-    function autoStart() {
-      autoScroll = setInterval(() => moveSlide(1), 4000);
-    }
-
-    function stopAuto() {
-      clearInterval(autoScroll);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      autoStart();
-    });
-  </script>
 </body>
 </html>
