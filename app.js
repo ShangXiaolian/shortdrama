@@ -4,11 +4,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   const API_URL = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
   const API_KEY = "Bearer patFyAm6jvrK5DXSo.c4f37b31cbf31e45cc4ac2601d5aa434fa9d01655aa208fcd9b824d39618ab66";
 
+  const LANG_TITLES = {
+    en: "🔥 Hot Trending Dramas",
+    es: "🔥 Dramas Populares",
+    fr: "🔥 Séries Populaires",
+    pt: "🔥 Dramas em Alta",
+    ar: "🔥 المسلسلات الرائجة"
+  };
+
   const lang = navigator.language.slice(0, 2);
   let currentLang = ["en", "es", "fr", "pt", "ar"].includes(lang) ? lang : "en";
   let allRecords = [];
 
   const fetchDramas = async () => {
+    const cached = localStorage.getItem("dramaCache");
+    const cacheTime = localStorage.getItem("dramaCacheTime");
+
+    if (cached && cacheTime && Date.now() - parseInt(cacheTime) < 24 * 3600 * 1000) {
+      allRecords = JSON.parse(cached);
+      renderLanguageOptions();
+      renderCarousel();
+      renderDramas();
+      return;
+    }
+
     const res = await fetch(API_URL, {
       headers: { Authorization: API_KEY }
     });
@@ -20,8 +39,37 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const data = await res.json();
     allRecords = data.records;
+    localStorage.setItem("dramaCache", JSON.stringify(allRecords));
+    localStorage.setItem("dramaCacheTime", Date.now().toString());
+
+    renderLanguageOptions();
     renderCarousel();
     renderDramas();
+  };
+
+  const renderLanguageOptions = () => {
+    const langs = [...new Set(allRecords.map(r => r.fields.Language))];
+    const selector = document.getElementById("language-selector");
+    selector.innerHTML = "";
+
+    langs.forEach(l => {
+      const opt = document.createElement("option");
+      opt.value = l;
+      opt.textContent = {
+        en: "English", es: "Español", fr: "Français", pt: "Português", ar: "العربية"
+      }[l] || l;
+      selector.appendChild(opt);
+    });
+
+    if (!langs.includes(currentLang)) currentLang = langs[0];
+    selector.value = currentLang;
+
+    updateTitle();
+  };
+
+  const updateTitle = () => {
+    const titleEl = document.getElementById("carousel-title");
+    titleEl.textContent = LANG_TITLES[currentLang] || "🔥 热播短剧";
   };
 
   const renderCarousel = () => {
@@ -81,6 +129,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("language-selector").addEventListener("change", (e) => {
     currentLang = e.target.value;
+    updateTitle();
     renderCarousel();
     renderDramas();
   });

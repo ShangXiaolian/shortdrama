@@ -4,7 +4,7 @@ body {
   margin: 0;
 }
 .container {
-  max-width: 500px;
+  max-width: 100%;
   margin: auto;
 }
 .carousel-title {
@@ -90,13 +90,12 @@ body {
   font-size: 0.9rem;
 }
 #masonry {
-  column-width: 140px;
-  column-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.5rem;
   padding: 0.5rem;
 }
 .drama-card {
-  break-inside: avoid;
-  margin-bottom: 0.75rem;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
