@@ -1,119 +1,84 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
   margin: 0;
+  padding: 0;
+  background: #fff;
 }
-.container {
-  max-width: 100%;
-  margin: auto;
-}
-.carousel-title {
-  font-size: 1.2rem;
-  font-weight: bold;
+.carousel-section {
+  padding: 1rem 0;
   text-align: center;
-  margin: 0.5rem auto 0.25rem;
 }
-.carousel-wrapper {
-  position: relative;
-  height: 220px;
-  overflow: hidden;
-  margin: 0 auto 1rem;
+#carousel-title {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }
-.carousel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.swiper {
+  width: 100%;
+  padding: 10px 0 30px;
+  box-sizing: border-box;
 }
-.carousel-card {
-  flex: 0 0 auto;
-  width: 140px;
-  height: 200px;
-  margin: 0 0.25rem;
-  border-radius: 12px;
+.swiper-slide {
+  width: 70%;
   background-size: cover;
   background-position: center;
-  transition: all 0.4s ease-in-out;
+  border-radius: 16px;
+  height: 200px;
+  transition: transform 0.5s ease, opacity 0.5s ease;
   cursor: pointer;
-  opacity: 0.4;
-  transform: scale(0.85);
 }
-.carousel-card.center {
-  transform: scale(1.1);
-  opacity: 1;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
 }
-.carousel-card.left {
-  transform: translateX(-20px) scale(0.9);
-}
-.carousel-card.right {
-  transform: translateX(20px) scale(0.9);
-}
-.nav-btn {
-  position: absolute;
-  top: 40%;
-  background-color: rgba(255,255,255,0.9);
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 3;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-}
-.nav-btn.prev {
-  left: 5px;
-}
-.nav-btn.next {
-  right: 5px;
-}
-.search-section {
+.controls {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  gap: 1rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
 }
-.search-section input, .search-section select {
-  padding: 0.4rem;
-  font-size: 0.95rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-.sticker-tip {
-  text-align: center;
-  background: #ffe;
-  color: #444;
-  margin: 0.5rem 1rem;
-  padding: 0.4rem;
-  border: 1px dashed #ffa;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
-#masonry {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 0.5rem;
+#search-box, #language-selector {
   padding: 0.5rem;
+  font-size: 1rem;
+}
+#hint {
+  text-align: center;
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+}
+.masonry {
+  column-count: 2;
+  column-gap: 1rem;
+  padding: 0 1rem;
 }
 .drama-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  display: inline-block;
+  margin-bottom: 1rem;
+  width: 100%;
+  break-inside: avoid;
   cursor: pointer;
+  animation: fadeIn 0.6s ease-in-out;
 }
 .drama-card img {
   width: 100%;
-  height: auto;
-  display: block;
   border-radius: 12px;
 }
 .drama-card h3 {
-  margin: 0;
-  padding: 0.4rem;
-  font-size: 0.85rem;
+  margin: 0.3rem 0 0;
+  font-size: 1rem;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (min-width: 500px) {
+  .masonry { column-count: 3; }
+}
+@media (min-width: 768px) {
+  .masonry { column-count: 4; }
 }
